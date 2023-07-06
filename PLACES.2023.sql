@@ -1,0 +1,23 @@
+DROP TABLE IF EXISTS `General_Places`;
+DELIMITER //
+CREATE TABLE IF NOT EXISTS `General_Places` (
+
+	`Id` CHAR(6) CHARACTER SET ascii NOT NULL,
+	`Region` VARCHAR(64) CHARACTER SET utf8mb4 NOT NULL,
+	`Department` VARCHAR(64) CHARACTER SET utf8mb4 NOT NULL,
+	`Province` VARCHAR(64) CHARACTER SET utf8mb4 NOT NULL,
+	`District` VARCHAR(64) CHARACTER SET utf8mb4 NOT NULL
+
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+//
+DELIMITER ;
+
+-- PK
+ALTER TABLE `General_Places`
+ADD CONSTRAINT `PK_GeneralPlacesIndex` PRIMARY KEY (`Id`);
+
+UPDATE `General_Places`
+SET `Id`= CONCAT('0',`Id`)
+WHERE LENGTH(`Id`) = 5;
+
+SELECT * FROM `General_Places` WHERE LENGTH(`Id`) < 6
